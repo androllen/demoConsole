@@ -6,8 +6,8 @@ namespace demoConsole
     {
         public static int[] Sort(int[] array)
         {
-            int[] copyArray= new int[array.Length];
-            Array.Copy(array,copyArray,array.Length);
+            int[] copyArray = new int[array.Length];
+            Array.Copy(array, copyArray, array.Length);
             // 总共要经过 N-1 轮比较
             for (int i = 0; i < copyArray.Length - 1; i++)
             {
@@ -16,7 +16,7 @@ namespace demoConsole
                 // 每轮需要比较的次数 N-i
                 for (int j = i + 1; j < copyArray.Length; j++)
                 {
-                    if (copyArray[j] < copyArray[min])
+                    if (copyArray[min] > copyArray[j])
                     {
                         // 记录目前能找到的最小值元素的下标
                         min = j;
