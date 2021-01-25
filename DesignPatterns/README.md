@@ -1,47 +1,111 @@
 # 设计模式
 
-## 原则：
+解耦 重用
 
-- 可靠、易于理解、重用、便于升级和维护
-- 开闭原则
+## 设计模式原则：
+
+- 开闭原则 OPEN CLOSE PRINCIPLE
   
   ```sh
+  开闭原则是面向对象设计中最基础的设计原则
   对扩展开放，对修改关闭
   ```
 
+- 依赖倒置原则
+  具体实现应该依赖于抽象
+  高模块不应该依赖低模块，都依赖抽象
+
+  ```
+  public interface IDriver{
+  　　public void drive(ICar car);
+  }
+
+  public class Tester : IDriver{
+  　　public void drive(ICar car){
+  　　　　car.run();
+  　　}
+  }
+
+  public class User : IDriver{
+  　　public void drive(ICar car){
+  　　　　car.run();
+  　　}
+  }
+
+  public interface ICar{
+  　　public void run();
+  }
+
+  public class Benz : ICar{
+  　　public void run(){
+  　　　　System.out.println("奔驰骑车开始运行....");
+  　　}
+  }
+
+  public class BMW : ICar{
+  　　public void run(){
+  　　　　System.out.println("宝马骑车开始运行....");
+  　　}
+  }
+  public class Client{
+  　　public static void main(String[] args){
+  　　　　IDriver tester = new Driver();
+  　　　　ICar benz = new Benz();
+  　　　　ICar bmw = new BMW();
+
+  　　　　tester.drive(benz);
+  　　　　tester.drive(bmw);
+  　　}
+  }
+  ```
+
 - 里氏代换原则
-  
-  ```sh
-  只有当派生类可以替换掉基类，且软件单位的功能不受到影响时，基类才能真正被复用，而派生类也能够在基类的基础上增加新的行为
-  ```
-
-- 依赖倒转原则
-
-  ```sh
-  接口编程，依赖于抽象而不依赖于具体
-  ```
-
 - 接口隔离原则
-
-  ```sh
-  降低类之间的耦合度
-  ```
-
 - 最少知道原则
-  
-  ```sh
-  一个实体应当尽量少地与其他实体之间发生相互作用，使得系统功能模块相对独立
-  ```
-
 - 合成复用原则
-
-  ```sh
-  尽量使用合成/聚合的方式，而不是使用继承
-  ```
 
 ## 常用的设计模式
 
 ### 单例模式
+
+### 简单工厂模式
+
+  ```
+  public interface ISample
+  {
+      void Say();
+  }
+  public class SampleA : ISample
+  {
+      public void Say()
+      {
+          Debug.WriteLine("this is a");
+      }
+  }
+  public class SampleB : ISample
+  {
+      public void Say()
+      {
+          Debug.WriteLine("this is b");
+      }
+  }
+  public class Factory
+  {
+      public static ISample Run(int which)
+      {
+          ISample sample = null;
+          if (which == 1)
+              sample = new SampleA();
+          else if (which == 2)
+              sample = new SampleB();
+
+          return sample;
+      }
+  }
+
+  ISample _sa = Factory.Run(1)
+  _sa.Say()
+  ```
 
 ### 工厂模式
 
